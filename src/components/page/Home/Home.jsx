@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import {  FaPlus } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
 import ChocolateTable from './ChocolateTable';
 
 const Home = () => {
+    const chocolatesLoader = useLoaderData();
+    const [chocolates, setChocoletes] = useState(chocolatesLoader)
     return (
         <div className='m-[114px]'>
 
@@ -14,12 +16,21 @@ const Home = () => {
                 <ul className='flex justify-between text-black text-bold mr-12'>
                     <li>Image</li>
                     <li>Name</li>
-                    <li>Country</li>
+                    <li>Factory</li>
                     <li>Category</li>
                     <li>Action</li>
                 </ul>
             </div>
-            <ChocolateTable></ChocolateTable>
+            {
+                chocolates.map(chocolate => <ChocolateTable
+                    key={chocolate._id}
+                    chocolate={chocolate}
+                    setChocoletes={setChocoletes}
+                    chocolates={chocolates}
+                ></ChocolateTable>)
+            }
+
+
 
         </div>
     );

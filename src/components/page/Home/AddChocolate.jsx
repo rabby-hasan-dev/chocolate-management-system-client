@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddChocolate = () => {
 
@@ -24,10 +25,17 @@ const AddChocolate = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.insertedId) {
-                    alert('Successfully added chocolate')
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Chocolate Added Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
+                form.reset();
             })
     }
 
